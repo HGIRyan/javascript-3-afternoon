@@ -30,8 +30,17 @@
 */
 
 //Code Here
-
-
+class Employee {
+  constructor(first_name, last_name, email, age) {
+    this.first_name = first_name;
+    this.last_name = last_name;
+    this.email = email;
+    this.age = age;
+  }
+  makeWidget() {
+    return `${this.first_name} ${this.last_name} Widget`;
+  }
+}
 
 ////////// PROBLEM 2 //////////
 
@@ -50,8 +59,21 @@
 */
 
 //Code Here
-
-
+class Manager {
+  constructor(first_name, last_name, email, age) {
+    this.first_name = first_name;
+    this.last_name = last_name;
+    this.email = email;
+    this.age = age;
+    this.reports = [];
+  }
+  hire(newHire) {
+    return this.reports.push(newHire);
+  }
+  fire(i) {
+    return this.reports.splice(i, 1);
+  }
+}
 
 ////////// PROBLEM 3 //////////
 
@@ -76,8 +98,39 @@
 */
 
 //Code Here
-
-
+class ProgressiveManager {
+  constructor(first_name, last_name, email, age) {
+    this.first_name = first_name;
+    this.last_name = last_name;
+    this.email = email;
+    this.age = age;
+    this.reports = [];
+    this.title = "Not a manager";
+    this.bonus = 0;
+  }
+  hire(employee) {
+    this.employee = employee;
+    this.reports.push(this.employee);
+    if (this.reports.length === 0) {
+      return (this.title = "Not a manager");
+    } else if (this.reports.length > 0 && this.reports.length < 4) {
+      return (this.title = "Barely Manager");
+    } else if (this.reports.length > 3 && this.reports.length < 11) {
+      return (this.title = "Mostly Manager");
+    } else if (this.reports.length > 10 && this.reports.length < 51) {
+      return (this.title = "Manager");
+    } else if (this.reports.length > 50 && this.reports.length < 101) {
+      return (this.title = "Manager Plus");
+    } else if (this.reports.length > 100) {
+      return (this.title = "Bestest Manager");
+    }
+  }
+  fire(i) {
+    this.i = i;
+    this.reports.splice(this.i, 1);
+    this.bonus = this.bonus + 100;
+  }
+}
 
 ////////// PROBLEM 4 - Black Diamond //////////
 
@@ -103,5 +156,46 @@
 */
 
 //Code Here
+// class Machine {
+//   constructor() {
+//     this.widgets_made_count = 0;
+//     this.wear_and_tear_count = 0;
+//     this.needs_reboot = false;
+//   }
+//   makeWidgets(number) {
+//     this.number = number;
+//     this.widgets_made_count = this.widgets_made_count + number;
+//     this.wear_and_tear_count = Math.florr(this.number / 50);
+//   }
+//   fixMachine() {
+//     this.needs_reboot = true;
+//   }
+//   reboot() {
+//     return () => {
+//       this.wear_and_tear_count = this.wear_and_tear_count - 10;
+//       this.needs_reboot = false;
+//     };
+//   }
+// }
 
 
+class Machine {
+  constructor(){
+    this.widgets_made_count = 0;
+    this.wear_and_tear_count = 0;
+    this.needs_reboot = false;
+  }
+  makeWidgets(number){
+    this.number = number;
+    this.widgets_made_count = this.widgets_made_count + number;
+    this.wear_and_tear_count += Math.floor(this.number/50);
+  }
+  fixMachine(){
+    this.needs_reboot = true;
+  }
+  reboot(){
+       return () => {this.wear_and_tear_count = this.wear_and_tear_count - 10;
+      this.needs_reboot = false;
+       }
+  }
+}
